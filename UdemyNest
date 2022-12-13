@@ -15,7 +15,7 @@ Criar Classe - nest g class "local exemplo courses/dto/create-course.dto --no-sp
 
 Validação de Dados e transformação  - npm i class-validator class-transformer
 interligar os Dto  - npm i @nestjs/mapped-types
-
+*******************************************************************************************************
 instalação do TypeOrm - npm i typeorm @nestjs/typeorm pg
 
 Para criar o container - docker run --name postgres -e 	POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
@@ -26,10 +26,10 @@ Desligar o Docker de um projeto - docker stop postgres
 
 Para o Docher nao iniciar com o PC -  sudo systemctl disable postgresql
 
-
+***************************************************************************************
 Criar a class da entidade do courses - nest g class courses/entities/tag.entity --no-spec
 
-
+*****************************************************************************************
 Depois de cirar o arquivo de migrations - ormconfig.js - iniciar os comandos abaixo.
 
 npx typeorm migration:create -n "nome" - no exemplo e o CourseRefactoring
@@ -42,12 +42,57 @@ atualizar a past dist - npm run build
 
 npx typeorm migration:run
 
-
+*********************************************************
 
  Liberar o commit
  
   entra na pasta
   ls -a  - verifica se tem o arquivo .git
   rm -rf .git - libera o arquivo para comitar 
+********************************************************
+Iniciando o Dockerfile
+
+FROM node:14.15.4-alpine3.12
+
+RUN apk add --no-cache bash
+
+RUN npm install -g @nestjs/cli
+
+USER node
+
+WORKDIR /home/node/app
+
+-------------------------------------------
+Criar o espelho do container na raiz da api
+
+ciar um arquivo - .docker/postgres/Dockerfile
+
+dentro do arquivo
+
+FROM postgres
+
+RUN usermod -u 1000 postgres
+
+-------------------------------------------------
+
+
+Dentro da pasta .docker colocar o arquivo - entrypoint.sh
+
+dentro do arquivo:
+
+#!/bin/bash
+
+npm install
+
+npm run build
+
+npx typeorm migration:run
+
+npm run start:dev
+
+--------------------------------------------------------------
+No terminal
+
+permissao de execucao do arquivo entrypoint - chmod +x .docker/entrypoint.sh
 
 
