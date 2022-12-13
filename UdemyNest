@@ -1,0 +1,53 @@
+instalar o nestJs - npm install -g @nestjs/cli
+
+criar o projeto nestJs - nest new "nome do projeto"
+
+Fazer o servidor ficar automatico - npm run start:dev
+
+Criar um controller - nest g controller "nome"
+
+Criar um serviço - nest g service "nome"
+
+Criar um modulo - nest g module "nome"
+
+Criar Classe - nest g class "local exemplo courses/dto/create-course.dto --no-spec
+
+
+Validação de Dados e transformação  - npm i class-validator class-transformer
+interligar os Dto  - npm i @nestjs/mapped-types
+
+instalação do TypeOrm - npm i typeorm @nestjs/typeorm pg
+
+Para criar o container - docker run --name postgres -e 	POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
+
+Para rodar o container - docker start postgres	
+
+Desligar o Docker de um projeto - docker stop postgres  
+
+Para o Docher nao iniciar com o PC -  sudo systemctl disable postgresql
+
+
+Criar a class da entidade do courses - nest g class courses/entities/tag.entity --no-spec
+
+
+Depois de cirar o arquivo de migrations - ormconfig.js - iniciar os comandos abaixo.
+
+npx typeorm migration:create -n "nome" - no exemplo e o CourseRefactoring
+
+
+npx typeorm migration:create "endereço/nome do arquivo" ./src/migrations/CourseRefactoring
+
+
+atualizar a past dist - npm run build
+
+npx typeorm migration:run
+
+
+
+ Liberar o commit
+ 
+  entra na pasta
+  ls -a  - verifica se tem o arquivo .git
+  rm -rf .git - libera o arquivo para comitar 
+
+
