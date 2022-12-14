@@ -94,5 +94,72 @@ npm run start:dev
 No terminal
 
 permissao de execucao do arquivo entrypoint - chmod +x .docker/entrypoint.sh
+------------------------------------------------------------------
+Docker Compose
+
+cria um arquivo na raiz do projeto - docker-compose.yml
+
+dentro do arquivo
+
+version:"3"
+
+services:
+ app:
+  build: .
+  entrypoint: .docker/entrypoint.sh
+  container_name: cursonestjs-app
+  ports:
+    - "3000:3000"
+  volumes:
+    - .:/home/node/app
+  depends_on:
+    - db 
+
+
+db:
+  build: .docker/postgres
+  container_name: cursonestje-db
+  restart: always
+  tty: true
+  ports:
+    - "5432:5432"
+  volumes:
+    - .docker/dbdata:/var/lib/postgresql/data  
+
+  environment:
+    -POSTGRES_PASSWOD=postgres
+    -POSTGRES_DB=cursonestjs
+
+pgadmin:
+  image:dpage/pgadmin4
+  container_name: cursonestjs-pgadmin
+  tty: true
+  envirenment:
+    - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+    - PGADMIN_DEFAULT_PASSWORD=admin
+  ports:
+    - "8000:80"
+  depends_on:
+    - db    
+
+********************************************************************
+Depois do objeto compilerOptions dentro do arquivo tsconfig.json colocar os itens abaixo 
+
+ "include": ["src"],
+  "exclude": [
+   "node_modules",
+   "build",
+   "dist",
+   ".docker" 
+  ]
+
+************************************************************************
+Comandos do docker compose 
+
+ * docker-compose up - Criar  e inicia container
+* docker-compose down - para e remove 
+* docker-compose stop  - para o container 
+* docker-compose start  - inicia o container
+
 
 

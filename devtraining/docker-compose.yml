@@ -15,20 +15,20 @@ services:
 
 db:
   build: .docker/postgres
-  container_name: cursonestje-db
+  container_name: cursonestjs-db
   restart: always
   tty: true
   ports:
     - "5432:5432"
   volumes:
-    - .docker/dbdata:/var/lib/postgresql/data  
+    - .docker/dbdata:/var/lib/postgresql/data
 
   environment:
     -POSTGRES_PASSWOD=postgres
     -POSTGRES_DB=cursonestjs
 
 pgadmin:
-  image:dpage/pgadmin4
+  image: dpage/pgadmin4
   container_name: cursonestjs-pgadmin
   tty: true
   envirenment:
